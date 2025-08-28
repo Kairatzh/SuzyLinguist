@@ -1,15 +1,15 @@
 """
     src/utils/states.py:
-        Храним все состояние тут.
+        Модуль для хранения глобального состояния приложения.
 """
-import json
+
 from pydantic import BaseModel
-from typing import Optional, Literal
+from typing import Optional, List, Dict
 
 class GlobalState(BaseModel):
-    query: Optional[str]
-    youtube: Optional[str]
-    test: Optional[str]
-    summarize: Optional[str]
-    grammar: Optional[str]
-
+    """Класс состояния, хранит все результаты работы агентов."""
+    query: Optional[str] = None          
+    youtube: Optional[List[str]] = None  
+    test: Optional[List[Dict]] = None    
+    summarize: Optional[str] = None      
+    grammar: Optional[str] = None       
