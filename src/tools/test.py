@@ -5,10 +5,11 @@
 
 import json
 from langchain_together import Together
+from langchain_core.output_parsers import StrOutputParser
 
 from src.utils.configs.settings import load_configs
 from src.utils.prompts import test_prompt
-from utils.states import GlobalState
+from src.utils.states import GlobalState
 
 configs = load_configs()
 llm = Together(
@@ -17,13 +18,21 @@ llm = Together(
     temperature=configs["llm"]["test_llm"]["temperature"],
     max_tokens=configs["llm"]["test_llm"]["max_tokens"]
 )
-responce = llm | test_prompt
+response_chain = test_prompt | llm | StrOutputParser()
 
 def test_generate(state: GlobalState) -> GlobalState:
-    query = state.query
-    tests = responce.invoke({"query": query})
+    if not state.query:
+        state.test = []
+        return state
+
     try:
-        test_dict = json.loads(tests)
+        tests_raw = response_chain.invoke({"query": state.query})
+    except Exception:
+        state.test = []
+        return state
+
+    try:
+        test_dict = json.loads(tests_raw)
         state.test = test_dict
     except json.JSONDecodeError:
         state.test = []

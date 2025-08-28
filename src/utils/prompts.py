@@ -35,7 +35,7 @@ summary_prompt = PromptTemplate(
 # Test prompt: {Text -> Json}
 test_prompt_template = """
 You are a professional language teacher and test creator.  
-Your task: generate 10 test questions about the topic "{topic}" in the **same language as the input**.  
+Your task: generate 10 test questions about the topic "{query}" in the **same language as the input**.  
 
 Constraints:
 - Output must be in strict JSON format.

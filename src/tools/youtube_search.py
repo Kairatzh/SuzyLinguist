@@ -12,5 +12,5 @@ def find_video(state: GlobalState) -> GlobalState:
         links = [v['link'] for v in videos.get('result', [])]
         state.youtube = links if links else None
     except Exception as e:
-        state.youtube = None
+        state.youtube = []
     return state
