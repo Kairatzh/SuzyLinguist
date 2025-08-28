@@ -9,5 +9,7 @@ from typing import Optional, Literal
 class GlobalState(BaseModel):
     query: Optional[str]
     youtube: Optional[str]
-    test: Optional[json]
+    test: Optional[str]
     summarize: Optional[str]
+    grammar: Optional[str]
+

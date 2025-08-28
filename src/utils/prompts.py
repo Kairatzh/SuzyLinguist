@@ -17,3 +17,10 @@ test_prompt = PromptTemplate(
     input_variables=["query"],
     template=test_prompt_template
 )
+
+# Grammar prompt: {text -> text}
+grammar_prompt_template = ""
+grammar_prompt = PromptTemplate(
+    input_variables=["query"],
+    template=grammar_prompt_template
+)

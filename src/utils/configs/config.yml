@@ -10,5 +10,12 @@ llm:
     model: ""
     max_tokens: 250
     temperature: 0.6
-  
+  grammar_llm: 
+    model: ""
+    max_tokens: 200
+    temperature: 0.4
+  orchestrator_llm:
+    model: ""
+    max_tokens: 100
+    temperature: 0.4
 
