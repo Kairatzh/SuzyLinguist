@@ -2,7 +2,10 @@
     src/utils/prompts.py:
         Нужные промты хранятся тут и можно менять их удобно и быстро
 """
+
+
 from langchain_core.prompts import PromptTemplate
+
 
 # Summary prompt: {Text -> Text}
 summary_prompt_template = """

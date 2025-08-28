@@ -23,6 +23,3 @@ def summmarize(state: GlobalState) -> GlobalState:
     query = state.query
     state.summarize = responce.invoke({"query": query})
     return state
-
-if __name__ == "__main__":
-    print(responce.invoke({"query": "What is Present Perfect"}))
