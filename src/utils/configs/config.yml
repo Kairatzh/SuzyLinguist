@@ -3,19 +3,19 @@
 llm:
   together_api_key: ${TOGETHER_API_KEY}
   summarize_llm:
-    model: ""
-    max_tokens: 200
+    model: "deepseek-ai/DeepSeek-V3"
+    max_tokens: 500
     temperature: 0.3
   test_llm:
-    model: ""
-    max_tokens: 250
-    temperature: 0.6
-  grammar_llm: 
-    model: ""
-    max_tokens: 200
+    model: "deepseek-ai/DeepSeek-V3"
+    max_tokens: 600
     temperature: 0.4
+  grammar_llm: 
+    model: "deepseek-ai/DeepSeek-V3"
+    max_tokens: 200
+    temperature: 0.3
   orchestrator_llm:
-    model: ""
+    model: "deepseek-ai/DeepSeek-V3"
     max_tokens: 100
     temperature: 0.4
 

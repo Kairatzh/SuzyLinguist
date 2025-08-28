@@ -8,7 +8,7 @@ import os.path
 import yaml
 from dotenv import load_dotenv
 
-def load_configs(path="src/utils/configs/configs.yml"):
+def load_configs(path="src/utils/configs/config.yml"):
     load_dotenv()
     with open(path, "r") as f:
         raw = f.read()
