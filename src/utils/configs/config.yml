@@ -1,0 +1,14 @@
+# configurables and env
+
+llm:
+  together_api_key: ${TOGETHER_API_KEY}
+  summarize_llm:
+    model: ""
+    max_tokens: 200
+    temperature: 0.3
+  test_llm:
+    model: ""
+    max_tokens: 250
+    temperature: 0.6
+  
+

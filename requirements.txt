@@ -1,0 +1,9 @@
+streamlit
+langchain
+langchain_together
+langchain_community
+langgraph
+pydantic
+youtube-search-python
+pyyaml
+python-dotenv
