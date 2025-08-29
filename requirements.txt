@@ -1,4 +1,4 @@
-python-telegram-bot>=21.0
+aiogram
 requests>=2.31.0
 tenacity>=8.2.0
 pandas>=2.0.0

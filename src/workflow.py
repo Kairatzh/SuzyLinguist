@@ -4,15 +4,11 @@ src/workflow.py:
 в единый мини-курс перед завершением.
 """
 
-from langchain_core.runnables import RunnableParallel
 from langgraph.graph import START, END, StateGraph
-from langgraph.graph.state import Runnable
 from src.utils.states import GlobalState
-from src.tools.grammar import grammar
 from src.tools.summary import summarize
 from src.tools.test import test_generate
 from src.tools.youtube_search import find_video
-from src.orchestrator import orchestrator
 
 
 # ========================
@@ -62,7 +58,6 @@ def course_builder(state: GlobalState) -> GlobalState:
     структурированный мини-курс.
     """
     try:
-        # Пример: соберем все в state.course
         state.course = {
             "summary": getattr(state, "summary", None),
             "tests": getattr(state, "tests", None),
@@ -85,27 +80,13 @@ def course_builder(state: GlobalState) -> GlobalState:
 workflow = StateGraph(GlobalState)
 
 # Узлы
-workflow.add_node("grammar_check", grammar_check)
 workflow.add_node("hub_node", hub_node)
 workflow.add_node("summary", summary_step)
 workflow.add_node("test_generation", test_generation)
 workflow.add_node("youtube_search", youtube_search)
 workflow.add_node("course_builder", course_builder)
 
-# Ветвление: orchestrator решает путь
-workflow.add_conditional_edges(
-    START,
-    orchestrator,
-    {
-        "check": "grammar_check",
-        "generate": "hub_node"
-    }
-)
-
-# Ветка "check"
-workflow.add_edge("grammar_check", END)
-
-# Ветка "generate": hub_node → все тулзы → course_builder → END
+workflow.add_edge(START, "hub_node")
 workflow.add_edge("hub_node", "summary")
 workflow.add_edge("hub_node", "test_generation")
 workflow.add_edge("hub_node", "youtube_search")
