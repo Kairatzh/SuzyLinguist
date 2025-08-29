@@ -13,3 +13,4 @@ class GlobalState(BaseModel):
     test: Optional[List[Dict]] = None    
     summarize: Optional[str] = None      
     grammar: Optional[str] = None       
+    course: Optional[List[Dict]]
