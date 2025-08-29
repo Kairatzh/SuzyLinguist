@@ -13,7 +13,7 @@ from src.utils.states import GlobalState
 
 configs = load_configs()
 llm = Together(
-    model=configs["llm"]["test_llm"]["model"],
+    model=configs["llm"]["model"],
     together_api_key=configs["llm"]["together_api_key"],
     temperature=configs["llm"]["test_llm"]["temperature"],
     max_tokens=configs["llm"]["test_llm"]["max_tokens"]

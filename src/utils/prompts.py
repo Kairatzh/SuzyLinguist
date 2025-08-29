@@ -60,26 +60,3 @@ test_prompt = PromptTemplate(
     input_variables=["query"],
     template=test_prompt_template
 )
-
-# Grammar prompt: {text -> text}
-grammar_prompt_template = """
-You are a professional language teacher and grammar corrector.  
-Your task: check the grammar of the user’s text and respond in the **same language as the input**.  
-
-Text: "{query}"
-
-Constraints:
-- Maximum length: 200 tokens.
-- Be concise, clear, and practical.
-- Provide only short feedback and one corrected version.
-- Give 1 simple example for clarification.
-
-Output structure:
-1. Feedback (1–2 sentences about mistakes)
-2. Corrected Text
-3. Example Sentence (showing correct usage)
-"""
-grammar_prompt = PromptTemplate(
-    input_variables=["query"],
-    template=grammar_prompt_template
-)

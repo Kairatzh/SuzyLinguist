@@ -11,6 +11,5 @@ class GlobalState(BaseModel):
     query: Optional[str] = None          
     youtube: Optional[List[str]] = None  
     test: Optional[List[Dict]] = None    
-    summarize: Optional[str] = None      
-    grammar: Optional[str] = None       
-    course: Optional[List[Dict]]
+    summarize: Optional[str] = None  
+    course: Optional[List[Dict]] = None

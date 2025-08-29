@@ -53,10 +53,6 @@ def hub_node(state: GlobalState) -> GlobalState:
 
 
 def course_builder(state: GlobalState) -> GlobalState:
-    """
-    Объединяет результаты всех предыдущих тулз в
-    структурированный мини-курс.
-    """
     try:
         state.course = {
             "summary": getattr(state, "summary", None),

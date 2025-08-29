@@ -10,19 +10,15 @@ from openai import OpenAI
 from src.utils.states import GlobalState
 from src.utils.configs.settings import load_configs
 
-# Загружаем ключ из настроек
 configs = load_configs()
 client = OpenAI(api_key=configs["llm"]["openai_api_key"])
 
 def check_speaking(state: GlobalState, audio_bytes: bytes, correct_text: str) -> GlobalState:
-    """Пайплайн проверки речи через OpenAI Whisper API."""
-    # 1. Сохраняем аудио во временный файл
     with tempfile.NamedTemporaryFile(delete=False, suffix=".wav") as tmp:
         tmp.write(audio_bytes)
         tmp.flush()
         audio_path = tmp.name
 
-    # 2. Распознаём речь через API Whisper
     with open(audio_path, "rb") as audio_file:
         transcript = client.audio.transcriptions.create(
             model="whisper-1",
@@ -31,7 +27,6 @@ def check_speaking(state: GlobalState, audio_bytes: bytes, correct_text: str) ->
 
     user_text = transcript.text.strip()
 
-    # 3. Сравнение с эталоном
     score = fuzz.ratio(user_text.lower(), correct_text.lower())
 
     if score > 80:
@@ -39,6 +34,5 @@ def check_speaking(state: GlobalState, audio_bytes: bytes, correct_text: str) ->
     else:
         feedback = f"Есть ошибки.\n\nВаш ответ: {user_text}\nПравильный ответ: {correct_text}"
 
-    # 4. Сохраняем в state
-    state.grammar = feedback  # лучше завести state.speaking отдельно
+    state.grammar = feedback  
     return state
