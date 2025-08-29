@@ -1,7 +1,7 @@
 """
-src/workflow.py:
-Граф воркфлоу, который объединяет результаты всех тулз
-в единый мини-курс перед завершением.
+    src/workflow.py:
+        Граф воркфлоу, который объединяет результаты всех тулз
+        в единый мини-курс перед завершением.
 """
 
 from langgraph.graph import START, END, StateGraph
@@ -87,3 +87,9 @@ workflow.add_edge("course_builder", END)
 
 # Компилируем
 app = workflow.compile()
+
+# Рисуем граф и сохраняем
+def draw_graph(graph, name_photo: str = "graph.png") -> None:
+        with open(name_photo, "wb") as f:
+            f.write(graph.get_graph().draw_mermaid_png())
+draw_graph(app)
