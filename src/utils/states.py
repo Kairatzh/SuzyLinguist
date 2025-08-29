@@ -12,4 +12,4 @@ class GlobalState(BaseModel):
     youtube: Optional[List[str]] = None  
     test: Optional[List[Dict]] = None    
     summarize: Optional[str] = None  
-    course: Optional[List[Dict]] = None
+    course: Optional[Dict[str, any]] = None
