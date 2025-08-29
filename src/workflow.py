@@ -15,14 +15,6 @@ from src.tools.youtube_search import find_video
 # Узлы с обработкой ошибок
 # ========================
 
-def grammar_check(state: GlobalState) -> GlobalState:
-    try:
-        return grammar(state)
-    except Exception as e:
-        state.logs.append(f"[grammar_check] Ошибка: {e}")
-        return state
-
-
 def summary_step(state: GlobalState) -> GlobalState:
     try:
         return summarize(state)
