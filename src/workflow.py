@@ -5,6 +5,8 @@
 """
 
 from langgraph.graph import START, END, StateGraph
+from src.tools.format import formatizer
+from src.tools.text_to_pdf import pdf_export
 from src.utils.states import GlobalState
 from src.tools.summary import summarize
 from src.tools.test import test_generate
@@ -73,6 +75,8 @@ workflow.add_node("summary", summary_step)
 workflow.add_node("test_generation", test_generation)
 workflow.add_node("youtube_search", youtube_search)
 workflow.add_node("course_builder", course_builder)
+workflow.add_node("text2pdf", pdf_export)
+workflow.add_node("format", formatizer)
 
 workflow.add_edge(START, "hub_node")
 workflow.add_edge("hub_node", "summary")
@@ -83,7 +87,11 @@ workflow.add_edge("summary", "course_builder")
 workflow.add_edge("test_generation", "course_builder")
 workflow.add_edge("youtube_search", "course_builder")
 
-workflow.add_edge("course_builder", END)
+workflow.add_edge("course_builder", "text2pdf")
+workflow.add_edge("text2pdf", "format")
+
+workflow.add_edge("format", END)
+
 
 # Компилируем
 app = workflow.compile()
