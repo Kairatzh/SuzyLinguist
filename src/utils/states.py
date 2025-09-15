@@ -5,7 +5,7 @@
 
 from pydantic import BaseModel
 from typing import Optional, List, Dict, Any
-
+from langgraph.channels import Buffer
 
 class GlobalState(BaseModel):
     """Класс состояния, хранит все результаты работы агентов."""
@@ -19,4 +19,5 @@ class GlobalState(BaseModel):
     final_message: Optional[str] = None    
     final_file: Optional[Any] = None       
 
-    logs: List[str] = []
+    class Config:
+        arbitrary_types_allowed = True

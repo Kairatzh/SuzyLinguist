@@ -11,7 +11,9 @@ from src.utils.states import GlobalState
 from src.tools.summary import summarize
 from src.tools.test import test_generate
 from src.tools.youtube_search import find_video
+from utils.logger import logger
 
+logger.info("Все библиотеки импортированы")
 
 # ========================
 # Узлы с обработкой ошибок
@@ -67,9 +69,11 @@ def course_builder(state: GlobalState) -> GlobalState:
 # Построение графа
 # ===========
 
-workflow = StateGraph(GlobalState)
+workflow = StateGraph(GlobalState, channels={"query": Buffer()})
 
 # Узлы
+logger.info("Начинается добавление узлов")
+
 workflow.add_node("hub_node", hub_node)
 workflow.add_node("summary", summary_step)
 workflow.add_node("test_generation", test_generation)
@@ -77,6 +81,9 @@ workflow.add_node("youtube_search", youtube_search)
 workflow.add_node("course_builder", course_builder)
 workflow.add_node("text2pdf", pdf_export)
 workflow.add_node("format", formatizer)
+
+
+logger.info("Начинается настройка связи между ними")
 
 workflow.add_edge(START, "hub_node")
 workflow.add_edge("hub_node", "summary")
@@ -94,10 +101,11 @@ workflow.add_edge("format", END)
 
 
 # Компилируем
+logger.info("Компиляция агента")
 app = workflow.compile()
 
 # Рисуем граф и сохраняем
-def draw_graph(graph, name_photo: str = "graph.png") -> None:
-        with open(name_photo, "wb") as f:
-            f.write(graph.get_graph().draw_mermaid_png())
-draw_graph(app)
+# def draw_graph(graph, name_photo: str = "graph.png") -> None:
+#         with open(name_photo, "wb") as f:
+#             f.write(graph.get_graph().draw_mermaid_png())
+# draw_graph(app)
