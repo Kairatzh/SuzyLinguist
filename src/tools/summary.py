@@ -24,7 +24,8 @@ configs = load_configs()
 #     max_tokens=configs["llm"]["summarize_llm"]["max_tokens"]
 # )
 
-output = StrOutputParser()
+# структурированный оутпут и готовый пайплайн
+output = StrOutputParser() 
 response_chain = summary_prompt | llm | output
 
 def summarize(state: GlobalState) -> GlobalState:
@@ -37,3 +38,4 @@ def summarize(state: GlobalState) -> GlobalState:
     except Exception as e:
         state.summarize = f"Error during summarization: {e}"
     return state
+

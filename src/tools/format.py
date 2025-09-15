@@ -1,5 +1,11 @@
+"""
+    format.py:
+        Форматируем текста
+"""
+
 import os
 from aiogram.types import FSInputFile
+
 from src.utils.states import GlobalState
 
 
